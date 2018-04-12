@@ -50,7 +50,7 @@ public class FileWordGenerator implements StartingWordGenerator {
 	private long getLineCount() {
 		long lineCount = 0;
 		try {
-			lineCount = Files.lines(Paths.get("words.txt")).count();
+			lineCount = Files.lines(Paths.get("bin/words.txt")).count();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,7 +62,7 @@ public class FileWordGenerator implements StartingWordGenerator {
 	private String getRandomWord(long lineCount) {
 		String line = null;
 		int randomIndex = new Random().nextInt((int) lineCount - 1);
-		try (Stream<String> lines = Files.lines(Paths.get("words.txt"))) {
+		try (Stream<String> lines = Files.lines(Paths.get("bin/words.txt"))) {
 			line = lines.skip(randomIndex - 1).findFirst().get();
 		} catch (Exception e) {
 			e.printStackTrace();
