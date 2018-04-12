@@ -1,10 +1,7 @@
 # Hangman
 
-This is a simple Java command line implementation of the popular hangman game. It can either be provided a word on the command line or ommit a word and have 
-a random word chosen instead. It attempts to solve the puzzle by guessing words one at a time. The dictionary used seen in the `bin` directory has been reduced to only english words
-that have english letters. No '-' are allowed for example, this is for simplicities sake. The program either solves the puzzle by guessing all 
-letters in the secret word, or fails by guesssing 6 letters incorrectly. The 6 letter limit aligns with the head, body, 2 arms, and 2 legs of
-a traditional game of hangman on paper. An example output of this program for the word elephant is as follows:
+This is a simple Java command line implementation of the popular hangman game. The word to guess may be provided via the command line, or omitted to have a random word chosen instead. It attempts to solve the puzzle by guessing letters one at a time. The dictionary used is a collection of all words in all files that are seen in the `bin` directory. Only words with english letters are allowed. Any words with a '-' are not allowed for example. The program either solves the puzzle by guessing all 
+letters in the secret word, or fails by guesssing 6 letters incorrectly. The 6 letter limit aligns with the head, body, 2 arms, and 2 legs of a traditional game of hangman on paper. An example output of this program for the word elephant is as follows:
 
 ```
 Word [elephant]
