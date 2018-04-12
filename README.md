@@ -44,3 +44,5 @@ correct and hidden characters.
 
 The character that is guessed is based on the subset of remaining possible words and the occurences of each character in this subset.
 If 'c' appears 2000 times and 'p' appears 1000 times, the letter c will be selected next for example.
+
+`ReductionGuesser` is probably the most interesting class, where all of the meat of the character guessing happens. It generates a `Multiset<Character>` of all characters in the remaining possible words, which also keeps count of occurences. The max of which is chosen.
