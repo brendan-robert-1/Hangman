@@ -3,7 +3,6 @@
  */
 package com.brobert;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -92,7 +91,7 @@ public class State {
 
 
 	public Set<Character> getGuessedChars() {
-		return new HashSet<>(guessedChars);
+		return new LinkedHashSet<>(guessedChars);
 	}
 
 
