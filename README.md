@@ -34,7 +34,7 @@ Remaining possible words: 1
 Turn 9 guessed [h] Hit! e l e p h a n t 
 Winner!
 Word [elephant]
-Guessed characters [[p, a, r, c, t, e, h, l, n]]
+Guessed characters [[e, r, t, n, a, c, l, p, h]]
 Misses [2]
 Final board [e l e p h a n t ]
 ```
