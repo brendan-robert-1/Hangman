@@ -3,12 +3,11 @@
  */
 package com.brobert;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.LineIterator;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
@@ -36,11 +35,13 @@ public class ReductionGuesser implements Guesser {
 	 */
 	private List<String> getPossibleWordsByLength(int wordLength) {
 		List<String> possibleWords = new ArrayList<>();
-		File file = new File("bin/words." + wordLength + ".txt");
-		try {
-			LineIterator it = FileUtils.lineIterator(file, "UTF-8");
-			while (it.hasNext()) {
-				possibleWords.add(it.nextLine());
+		String path = "/words." + wordLength + ".txt";
+
+		try (InputStream is = getClass().getResourceAsStream(path);
+				BufferedReader read = new BufferedReader(new InputStreamReader(is));) {
+			String line = null;
+			while ((line = read.readLine()) != null) {
+				possibleWords.add(line);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

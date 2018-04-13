@@ -53,9 +53,6 @@ public class HangmanGame {
 		}
 
 		if (state.wordFullyGuessed()) {
-			for (Character c : state.getGuessedChars()) {
-				System.out.println(c);
-			}
 			System.out.println("Winner!");
 			state.printWord();
 			System.out.println("Guessed characters [" + state.getGuessedChars().toString() + "]");

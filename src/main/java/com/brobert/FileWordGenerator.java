@@ -3,14 +3,14 @@
  */
 package com.brobert;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
@@ -26,6 +26,8 @@ public class FileWordGenerator implements StartingWordGenerator {
 	List<Integer> validWordLengths = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 27, 28,
 			29, 31, 45);
 
+	private String dictionaryFile = "/words.txt";
+
 
 
 	/* (non-Javadoc)
@@ -34,12 +36,12 @@ public class FileWordGenerator implements StartingWordGenerator {
 	@Override
 	public String generateStartingWord(char[] alphabet) {
 		long lineCount = getLineCount();
-		String line = getRandomWord(lineCount);
-		while (isValid(line, alphabet) == false) {
-			line = getRandomWord(lineCount);
+		String word = getRandomWord(lineCount);
+		while (isValid(word, alphabet) == false) {
+			word = getRandomWord(lineCount);
 		}
 
-		return line;
+		return word;
 	}
 
 
@@ -50,7 +52,12 @@ public class FileWordGenerator implements StartingWordGenerator {
 	private long getLineCount() {
 		long lineCount = 0;
 		try {
-			lineCount = Files.lines(Paths.get("bin/words.txt")).count();
+			InputStream is = getClass().getResourceAsStream(dictionaryFile);
+			BufferedReader read = new BufferedReader(new InputStreamReader(is));
+			String line = null;
+			while ((line = read.readLine()) != null) {
+				lineCount++;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -60,14 +67,20 @@ public class FileWordGenerator implements StartingWordGenerator {
 
 
 	private String getRandomWord(long lineCount) {
-		String line = null;
-		int randomIndex = new Random().nextInt((int) lineCount - 1);
-		try (Stream<String> lines = Files.lines(Paths.get("bin/words.txt"))) {
-			line = lines.skip(randomIndex - 1).findFirst().get();
+		String word = null;
+		int randomIndex = new Random().nextInt((int) lineCount - 1), currentIdx = 0;
+		try (
+				InputStream is = getClass().getResourceAsStream(dictionaryFile);
+				BufferedReader read = new BufferedReader(new InputStreamReader(is));) {
+			while (currentIdx < randomIndex) {
+				currentIdx++;
+				word = read.readLine();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return line;
+
+		return word;
 	}
 
 
