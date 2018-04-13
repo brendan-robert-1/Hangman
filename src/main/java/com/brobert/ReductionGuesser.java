@@ -7,7 +7,9 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
@@ -64,6 +66,24 @@ public class ReductionGuesser implements Guesser {
 
 
 
+	private void reducePossibleWords(State state) {
+		List<String> toRemove = new ArrayList<>();
+		int count = 0;
+		char[] currentBoard = state.getCurrentBoard().toCharArray();
+		for (String s : possibleWords) {
+			for (char c : s.toCharArray()) {
+				if (currentBoard[count] != '_' && currentBoard[count] != c) {
+					toRemove.add(s);
+				}
+				count++;
+			}
+			count = 0;
+		}
+		possibleWords.removeAll(toRemove);
+	}
+
+
+
 	/**
 	 * @param state
 	 * @return
@@ -87,30 +107,15 @@ public class ReductionGuesser implements Guesser {
 	private Multiset<Character> getPossibleCharacters(State state) {
 		Multiset<Character> chars = HashMultiset.create();
 		for (String possibleWord : possibleWords) {
+			Set<Character> possibleChars = new HashSet<>();
 			for (char c : possibleWord.toCharArray()) {
 				if (state.getGuessedChars().contains(c) == false) {
-					chars.add(c);
+					possibleChars.add(c);
 				}
 			}
+			chars.addAll(possibleChars);
 		}
 		return chars;
 	}
 
-
-
-	private void reducePossibleWords(State state) {
-		List<String> toRemove = new ArrayList<>();
-		int count = 0;
-		char[] currentBoard = state.getCurrentBoard().toCharArray();
-		for (String s : possibleWords) {
-			for (char c : s.toCharArray()) {
-				if (currentBoard[count] != '_' && currentBoard[count] != c) {
-					toRemove.add(s);
-				}
-				count++;
-			}
-			count = 0;
-		}
-		possibleWords.removeAll(toRemove);
-	}
 }
