@@ -46,3 +46,17 @@ The character that is guessed is based on the subset of remaining possible words
 If 'c' appears 2000 times and 'p' appears 1000 times, the letter c will be selected next for example.
 
 `ReductionGuesser` is probably the most interesting class, where all of the meat of the character guessing happens. It generates a `Multiset<Character>` of all characters in the remaining possible words, which also keeps count of occurences. The max of which is chosen.
+
+## Installation
+For testing or demonstration purposes this project has been built into a runnable jar that is included in the /target directory.
+In order to run this program, java must be installed and it helps to have it on your class path
+
+### Running the program
+From the directory where you downloaded `Hangman-0.0.1-SNAPSHOT.jar` execute the following command
+```
+java -jar Hangman-0.0.1-SNAPSHOT.jar
+```
+or to test for a specific word add it as an argument
+```
+java -jar Hangman-0.0.1-SNAPSHOT.jar elephant
+```
