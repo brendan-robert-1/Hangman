@@ -52,11 +52,11 @@ For testing or demonstration purposes this project has been built into a runnabl
 In order to run this program, java must be installed and it helps to have it on your class path
 
 ## Running Hangman
-From the directory where you downloaded `Hangman-0.0.1-SNAPSHOT.jar` execute the following command
+From the directory where you downloaded `hangman.jar` execute the following command
 ```
-java -jar Hangman-0.0.1-SNAPSHOT.jar
+java -jar hangman.jar
 ```
 or to test for a specific word add it as an argument
 ```
-java -jar Hangman-0.0.1-SNAPSHOT.jar elephant
+java -jar hangman.jar elephant
 ```
